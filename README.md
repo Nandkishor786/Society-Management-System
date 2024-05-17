@@ -44,9 +44,13 @@ To run this project locally, follow these steps:
 3. **Set up the environment variables**
     - Create a `.env` file in the `server` directory and add the following variables:
         ```env
-        PORT=5000
+        PORT=your_PORT
         JWT_SECRET=your_jwt_secret
         MONGODB_URI=your_mongodb_uri
+        ```
+      - Create a `.env` file in the `client` directory and add the following variables:
+        ```env
+        PORT=your_PORT
         ```
 
 4. **Run the application**

@@ -51,7 +51,7 @@ To run this project locally, follow these steps:
    
    - Create a `.env` file in the `client` directory and add the following variables:
         ```env
-        PORT=your_PORT
+        VITE_PORT=your_PORT
         ```
 
 5. **Run the application**

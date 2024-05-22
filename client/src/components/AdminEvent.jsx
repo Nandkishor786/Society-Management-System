@@ -5,7 +5,8 @@ import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const PORT = process.env.PORT;
+
+const PORT = import.meta.env.VITE_PORT;
 
 export const AdminEvent = () => {
   const [title, setTitle] = useState("");

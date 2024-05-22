@@ -7,7 +7,7 @@ import { BottomWarning } from "../components/BottomWarning";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const PORT = process.env.PORT;
+const PORT = import.meta.env.VITE_PORT;
 
 export const AdminSignIn = () => {
   const [username, setUsername] = useState("");

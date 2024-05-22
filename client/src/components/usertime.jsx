@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppBar from "./AppBar";
 
-const PORT = process.env.PORT;
+const PORT = import.meta.env.VITE_PORT;
 
 const UserByTime = () => {
   const [users, setUsers] = useState([]);

@@ -4,7 +4,7 @@ import apartmentPng from "../assets/apartment.png";
 import { Button } from "./Button";
 import { useNavigate } from "react-router-dom";
 
-const PORT = process.env.PORT;
+const PORT = import.meta.env.VITE_PORT;
 
 export const AdminDashboard = () => {
   const [users, setUsers] = useState([]);

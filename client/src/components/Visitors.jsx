@@ -5,7 +5,7 @@ import { InputBox } from "./InputBox";
 import { SubHeading } from "./SubHeading";
 import axios from "axios";
 
-const PORT = process.env.PORT;
+const PORT = import.meta.env.VITE_PORT;
 
 export const Visitors = () => {
   const [name, setName] = useState("");

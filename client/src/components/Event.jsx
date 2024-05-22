@@ -3,7 +3,7 @@ import AppBar from "./AppBar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const PORT = process.env.PORT;
+const PORT = import.meta.env.VITE_PORT;
 
 export const Event = () => {
   const [events, setEvents] = useState([]);

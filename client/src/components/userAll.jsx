@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const PORT = process.env.PORT;
+const PORT = import.meta.env.VITE_PORT;
 
 const UserAll = () => {
   const [users, setUsers] = useState([]);

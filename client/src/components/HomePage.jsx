@@ -1,8 +1,6 @@
 import { Button } from "./Button";
 import { Heading } from "./Heading";
-import { InputBox } from "./InputBox";
 import { SubHeading } from "./SubHeading";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const HomePage = () => {

@@ -16,7 +16,7 @@ Welcome to the Society Management System project! This web-based application hel
 
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**:  Node.js, Express.js
-- **Database**: MongoDB, PostgreSQL
+- **Database**: MongoDB
 - **Version Control**: Git, GitHub
 
 ## Installation

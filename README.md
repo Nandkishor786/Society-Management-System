@@ -14,7 +14,7 @@ Welcome to the Society Management System project! This web-based application hel
 
 ## Technologies Used
 
-- **Frontend**: React
+- **Frontend**: React, Tailwind CSS
 - **Backend**:  Node.js, Express.js
 - **Database**: MongoDB
 - **Version Control**: Git, GitHub

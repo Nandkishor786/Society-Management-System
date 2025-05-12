@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import AppBar from "./AppBar";
 
 const PORT = import.meta.env.VITE_PORT;
@@ -6,29 +6,27 @@ const PORT = import.meta.env.VITE_PORT;
 const UserByBlock = () => {
   const [users, setUsers] = useState([]);
   const [block, setBlock] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const fetchUser = async () => {
+  const fetchUser = useCallback(async () => {
+    if (!block) return;
+    setLoading(true);
+    setError("");
     try {
-      const res = await fetch(
-        `http://localhost:${PORT}/visitor/block/${block}`
-      );
+      const res = await fetch(`http://localhost:${PORT}/visitor/block/${block}`);
       const data = await res.json();
-      if (data.length > 0) {
-        setUsers(data);
-      } else {
-        setUsers([]);
-      }
-      console.log(data);
+      setUsers(data);
     } catch (e) {
-      console.error(e);
-    }
-  };
-
-  useEffect(() => {
-    if (block) {
-      fetchUser();
+      setError("Failed to fetch visitors. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   }, [block]);
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
   const handleBlockChange = (e) => {
     setBlock(e.target.value);
@@ -36,8 +34,7 @@ const UserByBlock = () => {
 
   return (
     <div>
-      <AppBar></AppBar>
-
+      <AppBar />
       <h1 className="text-center text-3xl mt-5">Visitors Data by Block</h1>
       <div className="flex justify-center">
         <label>
@@ -50,7 +47,11 @@ const UserByBlock = () => {
           />
         </label>
       </div>
-      <table className="w-max border-collapse">
+
+      {loading && <div className="text-center mt-4">Loading...</div>}
+      {error && <div className="text-center mt-4 text-red-600">{error}</div>}
+
+      <table className="w-max border-collapse mt-4">
         <thead>
           <tr>
             <th className="p-8 border-b-2 border-third">Name</th>
@@ -63,20 +64,22 @@ const UserByBlock = () => {
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(users) &&
-            users.map((user) => (
-              <tr key={user._id}>
-                <td className="p-8 border-b-2 border-third">{user.name}</td>
-                <td className="p-8 border-b-2 border-third">
-                  {user.contact_no}
-                </td>
-                <td className="p-8 border-b-2 border-third">{user.block}</td>
-                <td className="p-8 border-b-2 border-third">{user.room_no}</td>
-                <td className="p-8 border-b-2 border-third">{user.date}</td>
-                <td className="p-8 border-b-2 border-third">{user.time}</td>
-                <td className="p-8 border-b-2 border-third">{user.purpose}</td>
-              </tr>
-            ))}
+          {users.length === 0 && !loading && !error && (
+            <tr>
+              <td colSpan="7" className="text-center">No visitors found for this block.</td>
+            </tr>
+          )}
+          {users.map((user) => (
+            <tr key={user._id}>
+              <td className="p-8 border-b-2 border-third">{user.name}</td>
+              <td className="p-8 border-b-2 border-third">{user.contact_no}</td>
+              <td className="p-8 border-b-2 border-third">{user.block}</td>
+              <td className="p-8 border-b-2 border-third">{user.room_no}</td>
+              <td className="p-8 border-b-2 border-third">{user.date}</td>
+              <td className="p-8 border-b-2 border-third">{user.time}</td>
+              <td className="p-8 border-b-2 border-third">{user.purpose}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

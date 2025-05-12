@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react"; // Added useCallback
 import AppBar from "./AppBar";
 
 const PORT = import.meta.env.VITE_PORT;
@@ -8,7 +8,8 @@ const UserByRoom = () => {
   const [block, setBlock] = useState("");
   const [room, setRoom] = useState("");
 
-  const fetchUser = async () => {
+  // Use useCallback to memoize fetchUser
+  const fetchUser = useCallback(async () => {
     try {
       const res = await fetch(
         `http://localhost:${PORT}/visitor/room/${block}/${room}`
@@ -23,13 +24,13 @@ const UserByRoom = () => {
     } catch (e) {
       console.error(e);
     }
-  };
+  }, [block, room]); // Dependencies for fetchUser
 
   useEffect(() => {
     if (block && room) {
       fetchUser();
     }
-  }, [block, room]);
+  }, [block, room, fetchUser]); // Add fetchUser here
 
   const handleBlockChange = (e) => {
     setBlock(e.target.value);

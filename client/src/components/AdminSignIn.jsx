@@ -23,20 +23,25 @@ export const AdminSignIn = () => {
         <div className="rounded-lg bg-primary w-80 text-center p-2 h-max px-4">
           <Heading label={"Sign in"} />
           <SubHeading label={"Enter your credentials to access your account"} />
+
           <InputBox
+            type="text"
             placeholder="Enter your username/email"
             onChange={(e) => {
               setUsername(e.target.value);
             }}
             label={"Email"}
           />
+
           <InputBox
+            type="password"
             placeholder="Enter your password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
             label={"Password"}
           />
+
           <div className="pt-4">
             <Button
               label={"Sign in"}
@@ -49,11 +54,15 @@ export const AdminSignIn = () => {
                   .catch((err) => {
                     alert(err.response.data.message);
                   });
-                localStorage.setItem("token", response.data.token);
-                navigate("/admin/dashboard/");
+
+                if (response?.data?.token) {
+                  localStorage.setItem("token", response.data.token);
+                  navigate("/admin/dashboard/");
+                }
               }}
             />
           </div>
+
           <BottomWarning
             label={"Don't have an account?"}
             buttonText={"Sign up"}

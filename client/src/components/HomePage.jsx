@@ -9,8 +9,8 @@ export const HomePage = () => {
     <div className="bg-primary h-screen flex justify-center">
       <div className="flex flex-col justify-center">
         <div className="rounded-lg text-white bg-secondary w-max text-center p-2 h-max px-4">
-          <Heading label={"IO Apartments"} />
-          <SubHeading label={"Welcome to the IO Apartments"} />
+          <Heading label={"Secure Awas"} />
+          <SubHeading label={"Welcome to the Secure Awas"} />
           <div className="pt-4">
             <Button
               label={"Admin"}

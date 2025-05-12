@@ -1,4 +1,8 @@
-import React, { useEffect, useState } from "react";
+// Remove this line:
+// import React, { useEffect, useState, useCallback } from "react";
+
+// Instead, just import the necessary hooks:
+import { useEffect, useState, useCallback } from "react"; // Only the hooks
 import AppBar from "./AppBar";
 
 const PORT = import.meta.env.VITE_PORT;
@@ -9,7 +13,8 @@ const UserByTime = () => {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
-  const fetchUser = async () => {
+  // Memoizing fetchUser with useCallback
+  const fetchUser = useCallback(async () => {
     try {
       const res = await fetch(
         `http://localhost:${PORT}/visitor/time/${date}/${from}/${to}`
@@ -24,13 +29,13 @@ const UserByTime = () => {
     } catch (e) {
       console.error(e);
     }
-  };
+  }, [date, from, to]); // Dependencies for fetchUser
 
   useEffect(() => {
     if (date && from && to) {
       fetchUser();
     }
-  }, [date, from, to]);
+  }, [date, from, to, fetchUser]); // Add fetchUser to the dependency array
 
   const handleDateChange = (e) => {
     setDate(e.target.value);

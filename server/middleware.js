@@ -1,13 +1,14 @@
 require("dotenv").config();
-const JWT_SECRET = process.env.JWT_SECRET;
 const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(403).json({
-      message: "not start with Bearer",
+      message: "Authorization header is missing or doesn't start with 'Bearer '",
     });
   }
 
@@ -24,8 +25,9 @@ const authMiddleware = (req, res, next) => {
       });
     }
   } catch (error) {
+    console.error("Error during token verification:", error);
     return res.status(403).json({
-      message: "some error",
+      message: "Invalid token or token expired",
     });
   }
 };

@@ -1,5 +1,4 @@
-// UserAll.js
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; // No need to import React if not used
 import axios from "axios";
 
 const PORT = import.meta.env.VITE_PORT;
@@ -11,17 +10,17 @@ const UserAll = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`http://localhost:${PORT}/visitor/all`);
-        setUsers(res.data.visitor);
+        setUsers(res.data.visitors);  // Assuming 'visitors' is the key in the response
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching users:", error);
       }
     };
     fetchData();
-  });
+  }, []); // Empty dependency array to call only once on mount
 
   return (
     <div className="UserAll">
-      = <h1>All Users Data</h1>
+      <h1>All Users Data</h1> {/* Removed the equals sign */}
       <table>
         <thead>
           <tr>

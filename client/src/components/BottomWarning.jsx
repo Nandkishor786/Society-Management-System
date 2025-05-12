@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export function BottomWarning({ label, buttonText, to }) {
@@ -10,3 +11,10 @@ export function BottomWarning({ label, buttonText, to }) {
     </div>
   );
 }
+
+// ✅ Add PropTypes validation
+BottomWarning.propTypes = {
+  label: PropTypes.string.isRequired,
+  buttonText: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+};

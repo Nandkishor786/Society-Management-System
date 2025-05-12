@@ -1,38 +1,35 @@
 import { useEffect, useState } from "react";
 import AppBar from "./AppBar";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const PORT = import.meta.env.VITE_PORT;
+const PORT = import.meta.env.VITE_PORT || 5000;
 
 export const Event = () => {
   const [events, setEvents] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const data = async () => {
-      const response = await axios.get(`http://localhost:${PORT}/admin/events`);
-      setEvents(response.data);
-    };
-    data();
-  });
+    axios
+      .get(`http://localhost:${PORT}/admin/events`)
+      .then((res) => setEvents(res.data))
+      .catch((err) => console.error("Error fetching events:", err));
+  }, []);
 
   return (
     <div>
-      <AppBar></AppBar>
-      <div className="w-screen text-3xl text-center">Events</div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ml-4 mt-10">
+      <AppBar />
+      <h1 className="text-center text-3xl mt-4">Events</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
         {events.map((event) => (
-          <div key={event._id} className="p-2 border-2 border-third">
+          <div key={event._id} className="border rounded shadow p-4">
             <img
-              src={`http://localhost:3356/posters/${event.poster}`}
+              src={`http://localhost:${PORT}/posters/${event.poster}`}
               alt={event.title}
-              className="w-full h-60 object-cover"
+              className="w-full h-60 object-cover rounded"
             />
-            <div className="text-2xl text-center mt-2">{event.title}</div>
-            <div className="text-lg">Date: {event.date}</div>
-            <div className="text-lg">Time: {event.time}</div>
-            <div className="text-lg">{event.description}</div>
+            <h2 className="text-xl font-bold mt-2">{event.title}</h2>
+            <p className="text-sm text-gray-600">Date: {event.date}</p>
+            <p className="text-sm text-gray-600">Time: {event.time}</p>
+            <p className="mt-2">{event.description}</p>
           </div>
         ))}
       </div>

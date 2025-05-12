@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import AppBar from "./AppBar";
 
 const PORT = import.meta.env.VITE_PORT;
@@ -7,10 +7,18 @@ const UserByDate = () => {
   const [users, setUsers] = useState([]);
   const [date, setDate] = useState(""); // State to store the date input
 
-  const fetchUsersByDate = async (dateParam) => {
+  // Convert dd-mm-yyyy to mm-dd-yyyy
+  const formatDateForApi = (date) => {
+    const [day, month, year] = date.split("-");
+    return `${month}-${day}-${year}`;
+  };
+
+  // Using useCallback to memoize the function and avoid unnecessary re-creations
+  const fetchUsersByDate = useCallback(async (dateParam) => {
     try {
+      const formattedDate = formatDateForApi(dateParam);
       const res = await fetch(
-        `http://localhost:${PORT}/visitor/dates/${dateParam}`
+        `http://localhost:${PORT}/visitor/dates/${formattedDate}`
       );
 
       if (res.status === 404) {
@@ -23,15 +31,15 @@ const UserByDate = () => {
         console.log(data);
       }
     } catch (e) {
-      console.error(e);
+      console.error("Error fetching users:", e);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (date) {
       fetchUsersByDate(date);
     }
-  }, [date]);
+  }, [date, fetchUsersByDate]); // Add fetchUsersByDate to the dependency array
 
   const handleDateChange = (e) => {
     setDate(e.target.value);

@@ -13,8 +13,39 @@ export const AdminEvent = () => {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [poster, setPoster] = useState();
+  const [poster, setPoster] = useState(null);
   const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    // Check for empty fields
+    if (!title || !description || !date || !time || !poster) {
+      alert("All fields are required.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("date", date);
+    formData.append("time", time);
+    formData.append("poster", poster);
+
+    try {
+      const response = await axios.post(
+        `http://localhost:${PORT}/admin/event`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      localStorage.setItem("token", response.data.token); // assuming response contains a token
+      navigate("/admin/dashboard/");
+    } catch (err) {
+      alert(err.response?.data?.message || "An error occurred.");
+    }
+  };
 
   return (
     <div className="bg-secondary h-screen flex justify-center">
@@ -24,72 +55,36 @@ export const AdminEvent = () => {
           <SubHeading label={"Enter details of the event"} />
           <InputBox
             placeholder="Enter Event Title"
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
+            onChange={(e) => setTitle(e.target.value)}
             label={"Title"}
             type={"text"}
           />
           <InputBox
             placeholder="Enter Event Description"
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
+            onChange={(e) => setDescription(e.target.value)}
             label={"Description"}
             type={"text"}
           />
           <InputBox
             placeholder="Enter Event Date"
-            onChange={(e) => {
-              setDate(e.target.value);
-            }}
+            onChange={(e) => setDate(e.target.value)}
             label={"Date"}
             type={"text"}
           />
           <InputBox
             placeholder="Enter Event Time"
-            onChange={(e) => {
-              setTime(e.target.value);
-            }}
+            onChange={(e) => setTime(e.target.value)}
             label={"Time"}
             type={"text"}
           />
           <InputBox
             placeholder="Enter Event Poster"
-            onChange={(e) => {
-              setPoster(e.target.files[0]);
-            }}
+            onChange={(e) => setPoster(e.target.files[0])}
             label={"Poster"}
             type={"file"}
           />
           <div className="pt-4">
-            <Button
-              label={"Submit"}
-              onClick={async () => {
-                const formData = new FormData();
-                formData.append("title", title);
-                formData.append("description", description);
-                formData.append("date", date);
-                formData.append("time", time);
-                formData.append("poster", poster);
-
-                try {
-                  const response = await axios.post(
-                    `http://localhost:${PORT}/admin/event`,
-                    formData,
-                    {
-                      headers: {
-                        "Content-Type": "multipart/form-data",
-                      },
-                    }
-                  );
-                  localStorage.setItem("token", response.data.token);
-                  navigate("/admin/dashboard/");
-                } catch (err) {
-                  alert(err.response.data.message);
-                }
-              }}
-            />
+            <Button label={"Submit"} onClick={handleSubmit} />
           </div>
         </div>
       </div>

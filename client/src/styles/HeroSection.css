@@ -1,0 +1,33 @@
+.hero-section {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  background-image: url('/home1.jpg'); /* replace with actual path */
+  background-size: cover;            /* Ensures full area is filled */
+  background-position: center;       /* Centers the image */
+  background-repeat: no-repeat;      /* Prevents tiling */
+  background-color: rgba(222, 69, 69, 0.587);           /* Fallback if image doesn't fill */
+  transition: background-image 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+.arrow-btn.right {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+.hero-section.enlarged-home1 {
+  background-size: 120% !important;
+}

@@ -1,3 +1,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.myimage{
+
+  background-image: url('./assets/background.jpg');
+  background-size:contain ;
+  background-position: center;
+  
+   }
+
+  .animated-border {
+  position: relative;
+  border-radius: 1rem; /* match rounded-xl */
+  padding: 4px; /* thickness of border */
+  background: linear-gradient(
+    270deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #0000ff,
+    #4b0082,
+    #8f00ff,
+    #ff0000
+  );
+  background-size: 1400% 1400%;
+  animation: rainbowBorder 10s linear infinite;
+}
+
+.animated-border > .inner-card {
+  border-radius: 0.75rem; /* rounded-xl minus border padding */
+  background: white;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes rainbowBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+
+
+
+html {
+  scroll-behavior: smooth;
+}

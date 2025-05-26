@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"; // Import PropTypes
 
 export function SubHeading({ label }) {
-  return <div className="font-bold text-2xl pt-6">{label}</div>;
+  return <div className="font-bold text-2xl pt-6 font-serif ">{label}</div>;
 }
 
 // PropTypes validation

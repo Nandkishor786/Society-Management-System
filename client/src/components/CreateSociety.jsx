@@ -5,6 +5,8 @@ import { Heading } from "../components/Heading";
 import { SubHeading } from "../components/SubHeading";
 import { InputBox } from "../components/InputBox";
 import { Button } from "../components/Button";
+import AppBar from "./AppBar";
+
 
 const PORT = import.meta.env.VITE_PORT;
 
@@ -75,13 +77,16 @@ const CreateSociety = () => {
   };
 
   return (
-    <div className="bg-secondary min-h-screen flex justify-center items-center py-10">
-      <div className="flex flex-col justify-center w-full max-w-5xl px-6">
-        <div className="rounded-lg bg-primary text-center p-6 w-full shadow-md">
-          <Heading label={"Create Society"} />
-          <SubHeading label={"Enter society details below"} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 text-left">
+    <div>
+      <AppBar></AppBar>
+        <div className="myimage min-h-screen flex justify-center items-center py-10">
+      <div className="flex flex-col justify-center w-full max-w-5xl px-6">
+        <div className="rounded-lg bg-black bg-opacity-60 text-center text-neutral-200 font-serif px-8 pb-6 w-full shadow-md">
+          <Heading label={"Create Society"} />
+          <SubHeading label={"Enter your society details "} />  
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 text-left">
             <InputBox label="Society Name" placeholder="Enter Society Name" type="text" onChange={(e) => setSocietyName(e.target.value)} />
             <InputBox label="Address" placeholder="Enter Address" type="text" onChange={(e) => setAddress(e.target.value)} />
             <InputBox label="Contact Number" placeholder="Enter Contact Number" type="text" onChange={(e) => setContact(e.target.value)} />
@@ -111,6 +116,8 @@ const CreateSociety = () => {
         </div>
       </div>
     </div>
+    </div>
+   
   );
 };
 

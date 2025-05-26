@@ -117,4 +117,23 @@ router.get("/secure-societies", async (req, res) => {
 });
 
 
+
+// ==================== Get Single Society by ID ====================
+router.get("/society/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const society = await Society.findById(id);
+
+    if (!society) {
+      return res.status(404).json({ message: "Society not found" });
+    }
+
+    res.status(200).json({ society });
+  } catch (error) {
+    console.error("Error fetching society by ID:", error);
+    res.status(500).json({ message: "Failed to fetch society" });
+  }
+});
+
+
 module.exports = router;

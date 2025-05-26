@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Society Management System
 
 Welcome to the Society Management System project! This web-based application helps manage visitor data and events within a society. It allows administrators to efficiently store and sort visitor information, and create events that are visible to all site visitors.
@@ -85,3 +86,7 @@ Contributions are welcome! Please fork the repository and create a pull request 
 
 
 
+=======
+# MinorProject
+Secure Awas: A Smart Entry Management System for Rural Societies
+>>>>>>> 85e434742f6c5ba8fec4539f85b05e0f7ea76c02

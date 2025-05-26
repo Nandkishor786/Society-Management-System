@@ -1,0 +1,144 @@
+.pricing-section {
+  position: relative;
+  color: white;
+  overflow: hidden;
+  z-index: 1;
+  height: 900px;
+}
+
+/* Optional: uncomment to use blurred background */
+/*
+.pricing-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: url('/bg 7.png') center center/cover no-repeat;
+  filter: blur(8px);
+  z-index: 0;
+}
+*/
+
+.overlay {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(23, 15, 15, 0.6);
+  padding: 4rem 2rem;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.6);
+  color: #fff;
+  font-weight: 600;
+}
+
+.pricing-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 360px;
+  flex: 1 1 300px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #facc15;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+}
+
+.card-header {
+  background-color: #facc15;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 1rem;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  text-align: center;
+  margin: -2rem -2rem 1.5rem -2rem;
+}
+
+.features {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  padding: 0;
+}
+
+.features li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2563eb;
+  margin-top: 1rem;
+}
+
+.currency {
+  font-size: 1rem;
+  vertical-align: super;
+}
+
+.residents {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .pricing-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pricing-section {
+    height: auto;
+  }
+}
+
+.pricing-subheading-container {
+  background: #0a7bddc2;
+  text-align: center;
+  padding: 1rem;
+}
+
+.pricing-subheading {
+  font-size: 2rem;
+  color: #f0eee9;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.2);
+}

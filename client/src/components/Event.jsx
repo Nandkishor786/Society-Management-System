@@ -17,7 +17,7 @@ export const Event = () => {
   return (
     <div>
       <AppBar />
-      <h1 className="text-center text-3xl mt-4">Events</h1>
+      <h1 className="text-center text-3xl mt-4 ">Events</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
         {events.map((event) => (
           <div key={event._id} className="border rounded shadow p-4">

@@ -12,6 +12,8 @@ import AdminEvent from "./components/AdminEvent";
 import Event from "./components/Event";
 import CreateSociety from "./components/CreateSociety"; // Add the new component import
 import AdminSecureSocieties from "./components/AdminSecureSocieties"; // Import SecureSocieties
+import SocietyDetails from "./pages/SocietyDetails";
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         {/* Admin Auth */}
         <Route path="/admin/signin" element={<AdminSignIn />} />
         <Route path="/admin/signup" element={<AdminSignUp />} />
+
 
         {/* Admin Dashboard and Filters */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
@@ -41,6 +44,8 @@ function App() {
 
         {/* Visitor */}
         <Route path="/visitor" element={<Visitors />} />
+        
+        <Route path="/admin/society/:id" element={<SocietyDetails />} />
 
         {/* 404 Page */}
         <Route path="*" element={<h1>404 - Page Not Found</h1>} />

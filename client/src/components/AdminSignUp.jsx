@@ -6,8 +6,8 @@ import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import axios from "axios";
 import { useState } from "react";
+import AppBar from "./AppBar";
 
-// Ensure PORT is correctly imported from your .env or default to 5000
 const PORT = import.meta.env.VITE_PORT || 5000;
 
 export const AdminSignUp = () => {
@@ -16,79 +16,104 @@ export const AdminSignUp = () => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // New states for messages
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
   const navigate = useNavigate();
 
   const handleSignUp = async () => {
     try {
-      setLoading(true); // Set loading state to true when API call starts
-      console.log(username, firstName, lastName, password);
+      setLoading(true);
+      setError("");
+      setMessage("");
 
       const response = await axios.post(
         `http://localhost:${PORT}/admin/signup`,
-        {
-          username,
-          firstName,
-          lastName,
-          password,
-        }
+        { username, firstName, lastName, password }
       );
 
       if (response.data?.token) {
         localStorage.setItem("token", response.data.token);
-        navigate("/admin/dashboard");
+        setMessage("Signup successful! Redirecting...");
+        // You can add a slight delay before navigation if you want
+        setTimeout(() => {
+          navigate("/admin/signin");
+        }, 2000);
       } else {
-        alert("Failed to sign up. Please try again.");
+        setError("Failed to sign up. Please try again.");
       }
     } catch (error) {
-      alert(
+      setError(
         error?.response?.data?.message || "An error occurred while signing up."
       );
     } finally {
-      setLoading(false); // Reset loading state after API call finishes
+      setLoading(false);
     }
   };
 
   return (
-    <div className="bg-secondary h-screen flex justify-center">
-      <div className="flex flex-col justify-center">
-        <div className="rounded-lg bg-primary mb-2 text-center p-5 font-bold text-3xl">
-          ADMIN
-        </div>
-        <div className="rounded-lg bg-primary w-80 text-center p-2 h-max px-4">
-          <Heading label={"Sign up"} />
-          <SubHeading label={"Enter your information to create an account"} />
-          <InputBox
-            placeholder={"Enter your First Name"}
-            onChange={(e) => setFirstName(e.target.value)}
-            label={"First Name"}
-          />
-          <InputBox
-            placeholder={"Enter your Last Name"}
-            onChange={(e) => setLastName(e.target.value)}
-            label={"Last Name"}
-          />
-          <InputBox
-            placeholder={"Enter your Email"}
-            onChange={(e) => setUsername(e.target.value)}
-            label={"Email"}
-          />
-          <InputBox
-            placeholder={"Enter your Password"}
-            onChange={(e) => setPassword(e.target.value)}
-            label={"Password"}
-          />
-          <div className="pt-4">
-            <Button
-              onClick={handleSignUp}
-              label={loading ? "Signing up..." : "Sign up"}
-              disabled={loading}
-            />
+    <div className="overflow-x-hidden overflow-y-hidden">
+      <AppBar />
+      <div className="myimage h-screen flex justify-center items-start w-screen">
+        <div className="flex flex-col justify-start items-center mt-16 w-[800px] h-[600px] text-neutral-200 font-serif rounded-lg">
+          <div className="rounded-lg bg-black bg-opacity-60 mb-2 text-center p-2 font-bold text-3xl w-[400px]">
+            ADMIN
           </div>
-          <BottomWarning
-            label={"Already have an account?"}
-            buttonText={"Sign in"}
-            to={"/admin/signin"}
-          />
+          <div className="rounded-lg bg-black bg-opacity-60 w-full h-[400px] text-center mt-1 ">
+            <Heading label={"Sign up"} />
+            <SubHeading label={"Enter your information to create an account"} />
+            <div className="flex justify-center gap-20 items-start mt-6 ">
+              <div className="w-80">
+                <InputBox
+                  placeholder={"Enter your First Name"}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  label={"First Name"}
+                />
+                <InputBox
+                  placeholder={"Enter your Last Name"}
+                  onChange={(e) => setLastName(e.target.value)}
+                  label={"Last Name"}
+                />
+                <InputBox
+                  placeholder={"Enter your Email"}
+                  onChange={(e) => setUsername(e.target.value)}
+                  label={"Email"}
+                />
+              </div>
+              <div className="w-80">
+                <InputBox
+                  placeholder={"Enter your Password"}
+                  onChange={(e) => setPassword(e.target.value)}
+                  label={"Password"}
+                />
+                <div className="mt-8">
+                  <Button
+                    onClick={handleSignUp}
+                    label={loading ? "Signing up..." : "Sign up"}
+                    disabled={loading}
+                  />
+                  {/* Inline error or success messages */}
+                  {error && (
+                    <div className="text-red-500 mt-2 font-semibold">
+                      {error}
+                    </div>
+                  )}
+                  {message && (
+                    <div className="text-green-500 mt-2 font-semibold">
+                      {message}
+                    </div>
+                  )}
+                </div>
+                <BottomWarning
+                  label={"Already have an account?"}
+                  buttonText={"Sign in"}
+                  to={"/admin/signin"}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

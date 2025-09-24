@@ -64,7 +64,7 @@ const getVisitorByDate = async (req, res) => {
 // Get visitors by time range on a specific date
 const getVisitorByTime = async (req, res) => {
   try {
-    const { sortBy, sortOrder, page = 1, limit = 20 } = req.query;
+    const { sortBy, sortOrder, page = 1, limit = 30 } = req.query;
     const { from: timeFromParam, to: timeToParam, date: dateParam } = req.params;
 
     if (!isValidDate(dateParam)) {

@@ -18,6 +18,7 @@ export const AdminDashboard = () => {
       console.log("Visitors data from API:", res.data);
       // Adjust according to your backend response structure
       // For example if backend returns { visitors: [...] }:
+      console.log(res.data.visitors);
       if (res.data.visitors) {
         setUsers(res.data.visitors);
       } else if (Array.isArray(res.data)) {

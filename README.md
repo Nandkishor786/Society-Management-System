@@ -26,7 +26,7 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository**
     ```bash
-    git clone https://github.com/yourusername/society-management-system.git
+    git clone https://github.com/Nandkishor786/society-management-system.git
     cd society-management-system
     ```
 
@@ -45,9 +45,10 @@ To run this project locally, follow these steps:
 3. **Set up the environment variables**
     - Create a `.env` file in the `server` directory and add the following variables:
         ```env
-        PORT=your_PORT
-        JWT_SECRET=your_jwt_secret
-        MONGODB_URI=your_mongodb_uri
+MONGO_URI=mongodb://127.0.0.1:27017/SMS
+JWT_SECRET=9f375458759983c7071a6d08a380f060bc28dd666a69de8c18345029054d46fa6578d1253ef629a3e2c93313ff769570dbeb0e265a5089220b80324d744e76f1
+PORT=5000
+
         ```
    
    - Create a `.env` file in the `client` directory and add the following variables:
